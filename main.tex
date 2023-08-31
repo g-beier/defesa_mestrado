@@ -1,0 +1,483 @@
+\documentclass{beamer}
+    \usetheme{Warsaw}
+    %\usecolortheme{wolverine}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{float}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[math]{blindtext}
+\usepackage{indentfirst}
+\usepackage{tikz}
+    \usetikzlibrary{cd}
+\usepackage[numbers]{natbib}
+    \setcitestyle{notesep={; }}
+
+\usepackage{multicol}
+    
+\setbeamertemplate{enumerate items}[default]
+
+
+\title{Extensões Galoisianas Comutativas}
+\author{Gustav Beier}
+\institute{PPGMat - UFRGS}
+\date{25 de Maio de 2021}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+            \section{Introdução}
+\begin{frame}{Objetivos}
+    \begin{enumerate}
+        \item Estender a definição de extensão galoisiana de corpos para extensões de anéis comutativos;
+        \item Verificar as hipóteses necessárias para generalizar os resultados da teoria de Galois sobre corpos;
+        \item Estabelecer a cohomologia galoisiana sobre anéis comutativos e apresentar dois resultados sobre os grupos de cohomologia galoisiana;
+    \end{enumerate}
+\end{frame}
+\begin{frame}[fragile]{Teoria de Galois sobre Corpos}
+    \begin{center}
+    \begin{tikzcd}[row sep=scriptsize, column sep=scriptsize]
+        & L \arrow[leftarrow]{dl}\arrow{rr}\arrow[leftarrow]{dd} & & \{\text{id}_{L}\} \arrow{dl}\arrow{dd} \\
+        L^H \arrow[crossing over, leftarrow, dashed]{rr}\arrow[leftarrow]{dd} & & H \\
+        & M \arrow[leftarrow]{dl}\arrow[dashed]{rr} & & H_M \arrow{dl} \\
+        K \arrow{rr} & & G\arrow[crossing over, leftarrow]{uu} \\
+    \end{tikzcd}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    Dizemos que $L\mid_K$ é extensão de Galois com grupo de Galois $G$ se $L$ é uma extensão normal, finita e separável de $K$.
+    
+    \vspace{18pt}
+    Seja $L\mid_K$ uma extensão de corpos e $G$ um grupo finito de $K$-automorfismos de $L$. São equivalentes:
+    \begin{enumerate}
+    \item $L^G = K$;
+    \item $L$ é uma extensão de Galois de $K$ e $G$ é o grupo de todos os $K$-automorfismos de $L$;
+    \item O grupo $G$ tem ordem $[L:K]$;
+    \item $L$ é uma extensão finita de $K$ e $\varphi: L\rtimes G \rightarrow \text{Hom}_{K}(L,L)$ é um isomorfismo de $K$-álgebras.
+    \end{enumerate}
+\end{frame}
+\begin{frame}
+    Sob estas hipóteses, pelo Teorema do Elemento Primitivo, temos que $L = K(\alpha)$ para algum $\alpha \in L$, e portanto \[L = K(\alpha) \simeq \dfrac{K[x]}{\langle m_\alpha \rangle},\] onde $m_\alpha \in K[x]$ é o polinômio minimal de $\alpha$.
+\end{frame}
+
+\begin{frame}{Proposição 2.1.1.}
+    Seja $K$ um corpo e $f \in K[x]$ um polinômio mônico irredutível. Então $f$ é separável sobre $K$ se e somente se $\dfrac{K[x]}{\langle f \rangle} \otimes_K L$ não tem elementos nilpotentes não nulos, para qualquer extensão $L$ de $K$.
+\end{frame}
+
+            \section{Teoria de Galois}
+            \subsection{Seção 1: Álgebras Separáveis}
+
+\begin{frame}{Corolário 2.1.3.}
+    Seja $L$ uma extensão finita de um corpo $K$. Então, $L$ é uma extensão separável de $K$ se e somente se $L\otimes_K F$ não tem elementos nilpotentes não nulos, para qualquer extensão $F$ de $K$.
+\end{frame}
+
+\begin{frame}{Teorema 2.1.4.}
+    Seja $A$ uma $K$-álgebra comutativa de dimensão finita com unidade. Então $A$ é separável sobre o corpo $K$ se e somente se $A \simeq F_1 \oplus F_2 \oplus \dots \oplus F_n$, onde $F_i$ são extensões finitas e separáveis de $K$.
+\end{frame}
+
+\begin{frame}{Teorema 2.1.6.}
+    Seja $R$ uma anel comutativo com unidade e $S$ uma $R$-álgebra. Então, são equivalentes as seguintes afirmações:
+    \begin{enumerate}
+        \item $S$ é um $S^e$-módulo projetivo;
+        \item A sequência exata de $S^e$-módulos $$0 \rightarrow J(S)=\ker \mu \rightarrow S^e \xrightarrow{\mu} S \rightarrow 0$$onde $\mu(x\otimes y)=xy$, cinde;
+        \item Existe $e \in S^e$ tal que $\mu(e)=1$ e $J(S)e=0$. O elemento $e$ é chamado \emph{idempotente de separabilidade}.
+    \end{enumerate}
+    
+    \vspace{18pt}
+    
+    Se $S$ satisfaz a primeira condição deste teorema, dizemos que $S$ é uma $R$-álgebra separável.
+\end{frame}
+
+
+            \subsection{Seção 2: Extensões Galoisianas}
+\begin{frame}
+    Seja $S$ um anel comutativo com unidade, $G$ um grupo finito de automorfismos de $S$ e $R = S^G$.
+    
+    \vspace{18pt}
+    
+    Definimos duas álgebras auxiliares. A primeira é $D = S \rtimes G$, que é um $S$-módulo livre com geradores $\delta_\sigma$, $\sigma \in G$ e uma $R$-álgebra com multiplicação definida por $s \delta_\sigma t \delta_\tau = s \sigma(t) \delta_{\sigma\tau}$.
+    
+    \vspace{18pt}
+    
+    Além disso, temos que a aplicação $j: D \rightarrow \text{Hom}_R(S,S)$, definida por $j(s \delta_\sigma) = s\sigma$ é um homomorfismo de $R$-álgebras e de $S$-módulos.
+\end{frame}
+
+\begin{frame}
+    A segunda, denotada por $E$, é a álgebra de todas as funções de $G$ em $S$, com adição e multiplicação ponto a ponto. Para todo $\sigma \in G$, seja $v_\sigma \in E$ dada por $v_\sigma(\tau) = \delta_{\sigma, \tau}$. Então $E = \oplus_{\sigma \in G} S v_\sigma$.
+    
+    \vspace{18pt}
+    
+    Definimos $h: S\otimes S \rightarrow E$ por $h(s\otimes t)(\sigma) = s\sigma(t)$ para $\sigma \in G$. Desta forma, $h$ é um homomorfismo de $S$-álgebras.
+\end{frame}
+
+\begin{frame}{Definição 2.2.1.}
+    Sejam $f, g: S \rightarrow T$ homomorfismos de anéis comutativos. Dizemos que $f, g$ são fortemente distintos se, para qualquer idempotente não-nulo $e \in T$, existe $s \in S$ tal que $f(s)e \neq g(s)e$.
+\end{frame}
+
+\begin{frame}{Teorema 2.2.3.}
+    Seja $S$ um anel comutativo, $G$ um grupo finito de automorfismos de $S$ e $R=S^G$. Então, são equivalentes:
+    \begin{enumerate}
+        \item $S$ é uma $R$-álgebra separável, e os elementos de $G$ são dois a dois fortemente distintos;
+        \item Existem elementos $x_1,\dots,x_n;y_1,\dots,y_n$ de $S$ tais que $\sum_{i=1}^{n}x_i\sigma(y_i)=\delta_{1,\sigma}$ para todo $\sigma \in G$. Estes elementos são chamados \emph{sistema de coordenadas de Galois};
+        \item $S$ é um $R$-módulo projetivo finitamente gerado e $j: D \rightarrow \text{Hom}_{R}(S,S)$ é um isomorfismo;
+    \end{enumerate}
+\end{frame}
+\begin{frame}
+    \begin{enumerate}
+        \item[4.] Seja $M$ um $D$-módulo à esquerda, que pode ser visto como um $G$-módulo com $\sigma(m)=\delta_\sigma(m)$. Então a aplicação $\omega: S\otimes M^G \rightarrow M$ definida por $\omega(s\otimes m)=sm$ é um isomorfismo de $S$-módulos;
+        \item[5.] $h: S\otimes S \rightarrow E$ é um isomorfismo de $S$-álgebras;
+        \item[6.] Dado $\sigma \neq 1$ em G e um ideal maximal $I$ de $S$, existe $s=s(I,\sigma)$ tal que $s-\sigma(s)\not\in I$.
+    \end{enumerate}
+    
+    \vspace{18pt}
+    
+    Caso uma destas condições seja satisfeita, dizemos que $S$ é extensão galoisiana de $R$ com grupo de Galois $G$.
+\end{frame}
+
+
+\begin{frame}{Lema 2.2.7.}
+    A aplicação traço é definida por 
+    \begin{align*}
+        tr : S &\rightarrow S \\
+        x &\mapsto \sum_{\sigma\in G} \sigma(x)
+    \end{align*}
+    Então são verdadeiras as afirmações a seguir:
+    \begin{enumerate}
+        \item $tr(S) = R$;
+        \item existe $c \in S$ tal que $tr(c) = 1$;
+        \item $tr:S\rightarrow R$ é um epimorfismo de $R$-módulos que cinde;
+        \item $R$ é somando direto de $S$ como $R$-módulos;
+        \item $S\simeq R \oplus \ker{tr}$ como $R$-módulo.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Teorema 2.2.8.}
+    Seja $S$ uma extensão de Galois de $R$ com grupo de Galois $G$, e $A$ uma $R$-álgebra comutativa. Defina a ação de $G$ em $A\otimes S$ por $\sigma(a\otimes s) = a \otimes\sigma(s)$. Então $A\otimes S$ é uma extensão de Galois de $A$ com grupo de Galois $G$.
+\end{frame}
+
+            \subsection{Seção 3: Teorema Fundamental da Teoria de Galois}
+\begin{frame}
+    Seja $S$ uma extensão galoisiana de $R$ com grupo de Galois $G$ e $T \subset S$ um subanel. Se diz que $T$ é $G$-forte se para quaisquer $\sigma,\tau \in G$, $\left.\sigma\right|_T = \left.\tau\right|_T$ ou $\left. \sigma \right|_T$ e $\left. \tau \right|_T$ são fortemente distintos.
+    
+    \vspace{18pt}
+    
+    Definimos \[S^H = \{s \in S \mid \tau(s) = s, \forall \tau \in H\}\] e \[H_T = \{\sigma \in G \mid \sigma(t) = t, \forall t \in T\}\]
+\end{frame}
+
+\begin{frame}{Teorema 2.3.2. Teorema de Correspondência}
+    \begin{enumerate}
+        \item Seja $H$ um subgrupo de $G$ e $T=S^H$. Então, $T$ é uma $R$-álgebra separável e $G$-forte como subálgebra de $S$, e $S$ é uma extensão galoisiana de $T$ com grupo de Galois $H=H_T$.
+        \item Seja $T$ uma $R$-subálgebra separável e $G$-forte de $S$ e $H=H_T$. Então $T=S^H$.
+        \item Para cada $\sigma \in G$ e para cada $R$-subálgebra separável e $G$-forte $T$ de $S$, $H_{\sigma(T)}=\sigma H_T\sigma^{-1}$. Como consequência, um subgrupo $H$ de $G$ é normal se e somente se $\sigma(S^H) =S^H$, para todo $\sigma \in G$. Mais ainda, neste caso $S^H$ é uma extensão galoisiana de $R$ com grupo de Galois $G/H$.
+    \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \begin{center}
+    \begin{tikzcd}[row sep=scriptsize, column sep=scriptsize]
+        & S \arrow[leftarrow]{dl}\arrow{rr}\arrow[leftarrow]{dd} & & \{\text{id}_{S}\} \arrow{dl}\arrow{dd} \\
+        S^H \arrow[crossing over, leftarrow, dashed]{rr}\arrow[leftarrow]{dd} & & H \\
+        & T \arrow[leftarrow]{dl}\arrow[dashed]{rr} & & H_T \arrow{dl} \\
+        R \arrow{rr} & & G\arrow[crossing over, leftarrow]{uu} \\
+    \end{tikzcd}
+    \end{center}
+\end{frame}
+
+            \subsection{Seção 4: Homomorfismos de Extensões Galoisianas}
+\begin{frame}{Teorema 2.4.1.}
+    $A$ uma $R$-álgebra comutativa, $f,g : S \rightarrow A$ homomorfismos de $R$-álgebras. Então existe um único conjunto $\{e_\sigma \mid \sigma\in G\}$ de idempotentes ortogonais dois a dois de $A$ -- alguns possivelmente 0 -- tais que $\sum_{\sigma \in G} e_\sigma =1$ e \[g(s)=\sum_{\sigma \in G} f(\sigma(s))e_\sigma\]
+\end{frame}
+
+
+\begin{frame}{Teorema 2.4.3.}
+    Sejam $S,S'$ extensões galoisianas de $R$ com mesmo grupo de Galois $G$, e seja $f: S \rightarrow S'$ um homomorfismo de $R$-álgebras e $G$-módulos. Então $f$ é um isomorfismo.
+    
+    
+    \end{frame}
+    
+\begin{frame}{Teorema 2.4.4.}
+    Seja $S$ um anel comutativo sem idempotentes além de 0 e 1, $G$ um grupo arbitrário de automorfismos de $S$ e $R=S^G$. \par Assuma que $S$ é uma $R$-álgebra separável e um $R$-módulo finitamente gerado. Então $G$ é finito, $S$ é uma extensão galoisiana de $R$ com grupo de Galois $G$ e $G$ é o grupo de todos os $R$-automorfismos de $S$.
+\end{frame}
+
+\begin{frame}{Teorema 2.5.3.}
+    Seja $S$ extensão galoisiana de $R$ com grupo de Galois $G$. Sejam $R(G)$ e $S(G)$ os anéis de grupo de $G$ sobre $R$ e $S$, respectivamente. Vejamos $S$ e $S\otimes S$ como $R(G)$ e $S(G)$-módulos, respectivamente, pelas ações a seguir:
+\begin{align*}
+(r\sigma)(s) &= r\sigma(s) \\
+s\sigma(s_1\otimes s_2) &= ss_1 \otimes \sigma(s_2)
+\end{align*}
+\end{frame}
+
+\begin{frame}
+    Então, temos que 
+\begin{enumerate}
+    \item $S\otimes S \simeq S(G) \simeq S\otimes R(G)$ como $S(G)$-módulo e $S$ é um $R(G)$-módulo projetivo.
+    \item Se $S$ é um $R$-módulo livre e $|G|=n$, então a soma direta de $n$ cópias de $S$ é $R(G)$-isomorfa a soma direta de $n$ cópias de $R(G)$.
+    \item Se $R$ é um anel semi-local, então $S\simeq R(G)$ como $R(G)$-módulo, isto é, $S$ possui uma base normal.
+\end{enumerate}
+\end{frame}
+
+            \section{Cohomologia Galoisiana}
+            \subsection{Grupo de Brauer}
+\begin{frame}{Relação de Equivalência}
+    Seja $\mathcal{A}(R)$ o conjunto das classes de $R$-álgebras de Azumaya (centrais e separáveis) com respeito a isomorfismo, e $\mathcal{A}_0(R)$ o subconjunto das $R$-álgebras da forma $\text{Hom}_R(E,E)$, onde $E$ é um $R$-módulo projetivo finitamente gerado e fiel.
+    
+    \vspace{18pt}
+    
+    Definimos a relação de equivalência sobre $\mathcal{A}(R)$, onde $A_1 \sim A_2$ se existem álgebras $\Omega_1, \Omega_2 \in \mathcal{A}_0(R)$ tais que \[A_1 \otimes_R \Omega_1 \simeq A_2 \otimes_R \Omega_2.\]
+\end{frame}
+\begin{frame}{Grupo de Brauer}
+    O grupo de Brauer de $R$, definido por \[Br(R) := \mathcal{A}(R)/{\sim}\] é um grupo com a operação de produto tensorial, com elemento neutro $[R]$ inverso dado por $[S]^{-1} = [S^o]$.
+\end{frame}
+            \subsection{Cohomologia Galoisiana}
+\begin{frame}{Conceitos e Terminologia}
+    Uma sequência de grupos abelianos e homomorfismos 
+    \[\cdots \xrightarrow{f_{n-1}} G_n \xrightarrow{f_n} G_{n+1} \xrightarrow{f_{n+1}} \cdots\] que satisfazem $f_{n+1} \circ f_n = 0$ é chamada \emph{cocadeia complexa}.
+    
+    \vspace{18pt}
+    
+    Seja $G$ um grupo, $A$ um $G$-módulo e $n\in \mathbb{N}$.
+    
+    \vspace{18pt}
+    
+    Uma $n$-cocadeia de $G$ sobre $A$ é uma função $f:G^n\rightarrow A$, se $n>0$, ou um elemento de $A$ se $n = 0$. Denotamos por $C^n(G,A)$ o grupo abeliano das $n$-cocadeias de $G$ sobre $A$.
+    
+    
+\end{frame}
+
+\begin{frame}
+    A partir de uma $n$-cocadeia $f$, definimos o homomorfismo $\delta:C^n(G,A)\rightarrow C^{n+1}(G,A)$, chamado cobordo, que determina uma $(n+1)$-cocadeia $\delta f$, definida por 
+    
+\begin{align*}
+    \delta f(\sigma_1,\dots,\sigma_{n+1}) := \;\; &\sigma_1f(\sigma_2,\dots,\sigma_{n+1})\\
+    &+ \sum_{i=1}^{n}(-1)^i f(\sigma_1, \dots, \sigma_i\sigma_{i+1},\dots, \sigma_{n+1}) \\
+    &+ (-1)^n f(\sigma_1, \dots, \sigma_n).
+\end{align*}
+
+Então $\delta\delta f =0$.
+\end{frame}
+
+\begin{frame}
+    Sejam $Z^n(G,A)=\ker{\delta} \subseteq C^n(G,A)$ e $B^n(G,A)=\delta(C^{n-1}(G,A))$, se $n>0$, e $B^0(G,A)=0$. Chamamos $f\in Z^n(G,A)$ de $n$-cociclo e, para $g \in C^{n-1}(G,A)$, $\delta g \in B^n(G,A)$ de $n$-cobordo.
+    
+    \vspace{18pt}
+    
+    Como $C^n(G,A)$ é um grupo abeliano e
+    \[B^n(G,A) \subseteq Z^n(G,A) \subseteq C^n(G,A),\]
+    podemos definir o quociente \[\dfrac{Z^n(G,A)}{B^n(G,A)} =: H^n(G,A),\]
+    o $n$-ésimo grupo de cohomologia de $G$ sobre $A$.
+\end{frame}
+
+\begin{frame}{Lema 3.2.1.}
+    Sejam $S$ extensão galoisiana de $R$ com grupo de Galois $G$, $E^n$ a $S$-álgebra das funções de $n$ variáveis de $G$ em $S$ e $S^{n+1}$ uma $S$-álgebra com $S$ agindo no primeiro fator.
+    
+    \vspace{18pt}
+    
+    Então $h_n: S^{n+1}\rightarrow E^n$ definido por
+    \[h_n(s_0 \otimes \dots \otimes s_n)(\sigma_1,\dots,\sigma_n) = s_0\left( \sigma_1(s_1)\right)\left( \sigma_1\sigma_2(s_2)\right) \cdots \left(\sigma_1\cdots\sigma_n(s_n)\right)\] é um isomorfismo de $S$-álgebras.
+\end{frame}
+
+
+\begin{frame}
+    Seja $S$ extensão galoisiana de $R$ com grupo de Galois $G$, e $E^n$ a $S$-álgebra das funções de $n$ variáveis de $G$ em $S$.
+    
+    Definimos os homomorfismos de $R$-álgebras $\theta_i: E^n \rightarrow E^{n+1}$, onde
+    \begin{align*}
+        (\theta_0 f) (\sigma_1,\dots,\sigma_{n+1})     &=\sigma_1f(\sigma_2,\dots,\sigma_{n+1})\\
+        (\theta_i f) (\sigma_1,\dots,\sigma_{n+1})     &= f(\sigma_1, \dots, \sigma_i\sigma_{i+1},\dots, \sigma_{n+1}),\; (1\leq i \leq n)\\
+        (\theta_{n+1} f) (\sigma_1,\dots,\sigma_{n+1})  &= f(\sigma_1,\dots,\sigma_n)
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Extensões Galoisianas}
+    Seja $R$ um anel comutativo, $T$ uma $R$-álgebra comutativa e $T^n$ o produto tensorial de $T$ sobre $R$ com $n$ fatores. Sejam $\varepsilon_i: T^{n+1} \rightarrow T^{n+2}$ definidos por
+    \[\varepsilon_i(t_0\otimes\cdots\otimes t_n) = t_0 \otimes \cdots \otimes t_{i-1}\otimes 1 \otimes t_i \otimes \cdots \otimes t_n\]
+\end{frame}
+
+
+\begin{frame}[fragile]
+    O diagrama abaixo é comutativo, com os homomorfismos definidos anteriormente:
+    \begin{center}
+    \begin{tikzcd}[sep = huge]
+        S^{n+1} \arrow{d}{\varepsilon_i} \arrow{r}{h_n} & E^n \arrow{d}{\theta_i} \\
+        S^{n+2} \arrow{r}{h_{n+1}} & E^{n+1}
+    \end{tikzcd}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Para $i = 0$}
+    \[\begin{array}{rl}
+    & \theta_0(h_n(s_0\otimes\cdots\otimes s_n))(\sigma_1,\dots,\sigma_{n+1})  \\
+    =& \sigma_1(h_n(s_0\otimes\cdots\otimes s_n)(\sigma_2,\dots,\sigma_{n+1})) \\
+    =& \sigma_1\left(s_0\sigma_2(s_1)\cdots(\sigma_2\cdots\sigma_{n+1})(s_n)\right) \\
+    =& \sigma_1(s_0)\sigma_1\sigma_2(s_1)\cdots(\sigma_1\cdots\sigma_{n+1})(s_n),
+\end{array}\]
+
+\vspace{18pt}
+
+\[\begin{array}{rl}
+    & h_{n+1}(\varepsilon_0(s_0\otimes\cdots\otimes s_n))(\sigma_1,\dots,\sigma_{n+1}) \\
+    =& h_{n+1}(1\otimes s_0\otimes\cdots\otimes s_n)(\sigma_1,\dots,\sigma_{n+1}) \\
+    =& 1\sigma_1(s_0)\sigma_1\sigma_2(s_1)\cdots(\sigma_1\cdots\sigma_{n+1})(s_n).
+\end{array}\]
+\end{frame}
+
+
+\begin{frame}
+    Seja $F$ um funtor covariante da categoria de $R$-álgebras comutativas para a categoria de grupos abelianos e $T$ uma $R$-álgebra comutativa.
+
+    Definimos a cocadeia complexa de Amitsur $C(T/R, F)$ por \[C^n(T/R, F) = F(T^{n+1}),\]
+    com cobordo $\Delta^n: C^n(T/R, F) \rightarrow C^{n+1}(T/R, F)$, dado por \[\Delta^n = \sum_{i=0}^{n+1}(-1)^i F(\varepsilon_i).\]
+    
+    Então o $n$-ésimo grupo de cohomologia de Amitsur é denotado por $H^n(T/R,F)$.
+\end{frame}
+
+
+\begin{frame}{Definição: Funtor Aditivo}
+    Seja $F$ um funtor covariante da categoria de $R$-álgebras comutativas para a categoria de grupos abelianos. Se $J$ é um conjunto finito, seja $S_j$ uma $R$-álgebra comutativa, para cada $j\in J$.
+\end{frame}
+
+\begin{frame}{Definição: Funtor Aditivo}
+    As projeções $p_i: \bigoplus_{j \in J} S_j \rightarrow S_i$
+    determinam homomorfismos $F(p_i):F\left(\bigoplus_{j\in J} S_j\right)\rightarrow F\left(S_i\right)$, que dão origem a
+    \[\varphi_J: F\left(\bigoplus_{j\in J}S_j\right) \rightarrow \bigoplus_{j\in J} F\left(S_j\right)\] definido por $(\varphi_J)(x) = \sum_{i \in J}F(p_i)(x)$.
+    
+    \vspace{18pt}
+    
+    Dizemos que $F$ é um funtor aditivo se $\varphi_J$ é um isomorfismo para todo conjunto finito $J$.
+\end{frame}
+
+\begin{frame}
+    Seja $F$ um funtor aditivo e $J$ o produto cartesiano $G^n$, e $S_j = S$, para todo $j \in J$.
+    
+    \vspace{18pt}
+    
+    Denotemos o conjunto de todas as funções de $n$ variáveis de $G$ em $F(S)$, $\bigoplus_{j\in J}F(S_j)$, por $E_F^n$, que é justamente $C^n(G, F(S))$. Além disso, denotemos o isomorfismo $\varphi_J$ por $\varphi_n$.
+\end{frame}
+
+\begin{frame}
+    O homomorfismo de $R$-álgebras $\theta_i: E^n \rightarrow E^{n+1}$ dá origem a um homomorfismo $\theta_{i,F}: E^n_F\rightarrow E_F^{n+1}$, definido de forma explícita pela fórmula
+    \[  (\theta_{i,F}f)(\sigma_1,\dots,\sigma_{n+1}) = \begin{cases} \sigma_1 f(\sigma_2,\dots,\sigma_{n+1}) &\text{ para }i=0 \\
+    f(\sigma_1,\dots,\sigma_i\sigma_{i+1},\dots,\sigma_{n+1} ) &\text{ para } 1\leq i \leq n \\
+    f(\sigma_1,\dots,\sigma_n) &\text{ para }i=n+1
+    \end{cases}\]
+    e definimos $\delta^n: E_F^n \rightarrow E_F^{n+1}$ por $\delta^n = \sum_{i=0}^{n+1} (-1)^i \theta_{i,F}$.
+    
+    Desta forma os grupos abelianos $E_F^n$, junto com os homomorfismos $\delta^n$, formam a cocadeia complexa $C(G,F(S))$ do grupo $G$ com coeficientes no $G$-módulo $F(S)$.
+\end{frame}
+
+\begin{frame}[fragile]{Isomorfismo de Cocadeias Complexas}
+    \begin{center}
+\begin{tikzcd}
+\cdots \arrow{r} & G^n \arrow{r}{\delta^{n}} \arrow{d}{f^n} & G^{n+1} \arrow{r} \arrow{d}{f^{n+1}} & \cdots \\
+\cdots \arrow{r} & H^n \arrow{r}{\Delta^{n}}                  & H^{n+1} \arrow{r}                      & \cdots
+\end{tikzcd}
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Teorema 3.2.2.}
+    Sejam $F$ um funtor aditivo da categoria de $R$-álgebras comutativas para a categoria de grupos abelianos e $S$ extensão galoisiana de $R$ com grupo de Galois $G$. Então $C(S/R,F) \simeq C(G,F(S))$ como cocadeias complexas, e $H^n(S/R,F)\simeq H^n(G,F(S))$, para $n \geq 0$.
+\end{frame}
+
+\begin{frame}[fragile]
+    \begin{center}
+    \begin{tikzcd}[row sep=large, column sep=huge, font = \normalsize]
+
+        \vdots \arrow{d}[left]{\Delta^{n-1}} & & \vdots \arrow{d}{\delta^{n-1}} \\
+        F(S^{n+1}) \arrow{r}{F(h_n)} \arrow{d}{F(\varepsilon_i)} \arrow[bend left]{rr}{h_{n,F}} \arrow[bend right]{d}[left]{\Delta^n} & F(E^n) \arrow{d}{F(\theta_i)} \arrow[two heads, hook]{r}{\varphi_n} & E^n_F \arrow{d}[left]{\theta_{i,F}} \arrow[bend left]{d}{\delta^n} \\
+        F(S^{n+2}) \arrow{r}{F(h_{n+1})} \arrow[bend right]{rr}{h_{n+1,F}} \arrow{d}[left]{\Delta^{n+1}} & F(E^{n+1}) \arrow[two heads, hook]{r}{\varphi_{n+1}} & E^{n+1}_F \arrow{d}{\delta^{n-1}} \\
+        \vdots & & \vdots  \\
+\end{tikzcd}
+\end{center}
+\end{frame}
+
+\begin{frame}
+    Sejam $U, P$ funtores covariantes da categoria de $R$-álgebras comutativas para a categoria de grupos abelianos. Dada uma $R$-álgebra comutativa $T$:
+    
+    \vspace{18pt}
+    
+    $U(T)$ é o grupo multiplicativo dos elementos invertíveis de $T$.
+    
+    \vspace{18pt}
+    
+    $P(T)$ é o grupo dos $T$-módulos projetivos finitamente gerados de posto $1$, com a operação de produto tensorial, como construído por Bourbabki em [5; II, \textsection 5.4].
+\end{frame}
+
+\begin{frame}{Sequência Exata}
+A sequência
+    \begin{equation*} \begin{split}
+    0 \rightarrow H^1(S/R,U) \rightarrow &P(R) \rightarrow H^0(S/R,P) \rightarrow H^2(S/R,U) \\
+    &\rightarrow Br(S/R) \rightarrow H^1(S/R, P)\rightarrow H^3(S/R, U)
+\end{split} \end{equation*}
+é exata e foi obtida em [6; Theorem 7.6.] por Chase e Rosenberg.
+\end{frame}
+
+\begin{frame}{Corolário 3.2.5.}
+    Seja $S$ extensão galoisiana de $R$ com grupo de Galois $G$. Então existe uma sequência exata
+    \begin{equation*} \begin{split}
+    0 \rightarrow H^1(G,U(S)) \rightarrow P(R) \rightarrow H^0(G,P(S)) \rightarrow H^2(G,U(S)) \\
+    \rightarrow Br(S/R) \rightarrow H^1(G,P(S)) \rightarrow H^3(G,U(S)),
+    \end{split}\end{equation*}
+    onde $Br(S/R)$ é o grupo de Brauer das $R$-álgebras de Azumaya fatoradas por $S$.
+\end{frame}
+
+\begin{frame}{Teorema 90 de Hilbert}
+    Se todo $R$-módulo projetivo finitamente gerado de posto 1 é livre, então $H^1(G,U(S)) = 0$.
+\end{frame}
+
+\begin{frame}
+    Suponha que todo $S$-módulo projetivo finitamente gerado de posto 1 é livre. Então, a sequência \[0 \rightarrow H^2(G,U(S)) \rightarrow Br(R) \rightarrow Br(S)\] é exata.
+\end{frame}
+
+\section{}
+\subsection{Referências}
+\begin{frame}
+
+    [1] S. A. Amitsur. Simple algebras and cohomology groups of arbitrary fields, 1959.
+    
+    [2] F. W. Anderson, K. R. Fuller. Rings and categories of modules, 1974.
+    
+    [3] M. F. Atiyah, I. G. Macdonald. Introduction to commutative algebra, 1969.
+    
+    [4] M. Auslander, O. Goldman. The Brauer group of a commutative ring, 1960.
+    
+    [5] N. Bourbaki. Commutative algebra, 1989.
+    
+    [6] S. U. Chase, A. Rosenberg. Amitsur cohomology and the Brauer group, 1964.
+    
+    [7] S. U. Chase, D. K. Harrison, A. Rosenberg. Galois theory and Galois cohomology of commutative rings, 1965.
+    
+    [8] H. Chen. The Brauer group of rational numbers, 2019.
+    
+    [9] G. A. da C. Barreiros. Grupos e extensões de Galois, 2005.
+\end{frame}
+
+\begin{frame}
+
+    [10] R. R. de Araújo. Anéis de inteiros de corpos de números e aplicações, 2015.
+    
+    [11] G. L. A. de Camargo. Grupo de Brauer e o teorema de Merkurjev-Suslin, 2013.
+    
+    [12] V. L. Lima. Dualidade de grupos, cohomologia galoisiana e correspondências de Krummer, 2015.
+    
+    [13] R. A. Morris. On the Brauer group of $\mathbb{Z}$, 1971.
+    
+    [14] A. Paques. Teoría de Galois sobre anillos conmutativos, 1999.
+    
+    [15] A. Paques, T. Tamusiunas. The Galois correspondence theorem for grupoid actions.
+    
+    [16] I. Rapinchuk. The Brauer group of a field, 2012.
+    
+    [17] A. A. Sant'Ana. Uma introdução ao estudo dos anéis semissimples, 2016.
+    
+    [18] I. Stewart. Galois theory, 4ed, 2015.
+    
+    [19] O. Zariski, P. Sammuel. Commutative algebra I, 1975.
+\end{frame}
+
+\end{document}
